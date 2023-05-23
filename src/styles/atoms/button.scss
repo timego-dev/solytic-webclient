@@ -1,0 +1,22 @@
+.atom__button {
+  cursor: pointer;
+  background-color: $primary;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: $white;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: darken($primary, 5%);
+  }
+
+  &:active {
+    background-color: darken($primary, 10%);
+  }
+
+  &.atom__button--fullwidth {
+    width: 100%;
+  }
+}

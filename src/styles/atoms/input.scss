@@ -1,0 +1,16 @@
+.atom__input {
+  background-color: $dark-50;
+  border: none;
+  padding: 10px;
+  color: darken($white, 30%);
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    background-color: lighten($dark-50, 1%);
+  }
+}
+
+.atom__input-icon {
+
+}
