@@ -6,7 +6,7 @@
 import { defineProps } from "vue";
 import { Field } from "vee-validate";
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,

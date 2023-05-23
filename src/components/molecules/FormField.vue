@@ -16,7 +16,7 @@ import AInputIcon from "@/components/atoms/AInputIcon.vue";
 import AInput from "@/components/atoms/AInput.vue";
 import AErrorMessage from "@/components/atoms/AErrorMessage.vue";
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,

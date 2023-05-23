@@ -15,7 +15,7 @@
 import { defineProps } from "vue";
 import classnames from "classnames";
 
-const props = defineProps({
+defineProps({
   fullWidth: {
     type: Boolean,
     default: false,

@@ -23,16 +23,24 @@ import * as yup from "yup";
 import FormField from "@/components/molecules/FormField.vue";
 import AtomButton from "@/components/atoms/AButton.vue";
 
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
 const schema = ref(
   yup.object().shape({
-    username: yup.string().required("Username is required!"),
-    password: yup.string().required("Password is required!"),
+    email: yup.string().email("Invalid field!").required("Email is required!"),
+    password: yup
+      .string()
+      .min(8, "Please input at least 8 characters!")
+      .required("Password is required!"),
   })
 );
 
 const loginFields = [
   {
-    name: "username",
+    name: "email",
     type: "email",
     icon: "user",
   },
@@ -43,7 +51,7 @@ const loginFields = [
   },
 ];
 
-const handleLogin = (user) => {
+const handleLogin = (user: ILoginData) => {
   console.log(user);
 };
 </script>
