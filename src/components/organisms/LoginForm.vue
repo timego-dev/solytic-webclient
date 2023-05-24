@@ -19,6 +19,8 @@
 import { Form } from "vee-validate";
 import { ref } from "vue";
 import * as yup from "yup";
+import { useMutation } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 
 import FormField from "@/components/molecules/FormField.vue";
 import AtomButton from "@/components/atoms/AButton.vue";
@@ -51,7 +53,28 @@ const loginFields = [
   },
 ];
 
-const handleLogin = (user: ILoginData) => {
-  console.log(user);
+const handleLogin = async (user: ILoginData) => {
+  const { mutate } = useMutation(
+    gql`
+      mutation LoginUser($user: UserLoginInput!) {
+        loginUser(user: $user) {
+          user {
+            id
+          }
+          accessToken {
+            token
+            tokenType
+          }
+        }
+      }
+    `,
+    () => ({
+      variables: {
+        user,
+      },
+    })
+  );
+
+  await mutate();
 };
 </script>
