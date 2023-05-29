@@ -16,19 +16,21 @@
 </template>
 
 <script setup lang="ts">
+import AtomButton from "@/components/atoms/AButton.vue";
+import FormField from "@/components/molecules/FormField.vue";
+import { useAuthStore } from "@/store";
+import { ILoginData } from "@/type";
+import { storeToRefs } from "pinia";
 import { Form } from "vee-validate";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import * as yup from "yup";
-import { useMutation } from "@vue/apollo-composable";
-import gql from "graphql-tag";
 
-import FormField from "@/components/molecules/FormField.vue";
-import AtomButton from "@/components/atoms/AButton.vue";
+const authStore = useAuthStore();
+const { login } = authStore;
+const { user } = storeToRefs(authStore);
 
-export interface ILoginData {
-  email: string;
-  password: string;
-}
+const router = useRouter();
 
 const schema = ref(
   yup.object().shape({
@@ -39,6 +41,12 @@ const schema = ref(
       .required("Password is required!"),
   })
 );
+
+const handleLogin = async (userData: ILoginData) => {
+  await login(userData);
+  await router.push("/");
+  localStorage.setItem("user", JSON.stringify(user.value));
+};
 
 const loginFields = [
   {
@@ -52,29 +60,4 @@ const loginFields = [
     icon: "lock",
   },
 ];
-
-const handleLogin = async (user: ILoginData) => {
-  const { mutate } = useMutation(
-    gql`
-      mutation LoginUser($user: UserLoginInput!) {
-        loginUser(user: $user) {
-          user {
-            id
-          }
-          accessToken {
-            token
-            tokenType
-          }
-        }
-      }
-    `,
-    () => ({
-      variables: {
-        user,
-      },
-    })
-  );
-
-  await mutate();
-};
 </script>

@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { Field } from "vee-validate";
+import { defineProps } from "vue";
 
 defineProps({
   name: {

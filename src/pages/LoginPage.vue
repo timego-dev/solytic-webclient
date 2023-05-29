@@ -5,6 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import AuthTemplate from "@/templates/AuthTemplate.vue";
 import LoginForm from "@/components/organisms/LoginForm.vue";
+import AuthTemplate from "@/templates/AuthTemplate.vue";
 </script>
